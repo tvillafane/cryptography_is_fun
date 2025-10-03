@@ -85,8 +85,8 @@ class KeysController extends Controller
 
         $message             = $request->input('payload') . $nonce->body;
         $signature           = base64_decode($request->input('signature'));
-        $keyResource         = openssl_pkey_get_public($public_key->body);
-        $verification_status = openssl_verify($message, $signature, $keyResource, OPENSSL_ALGO_SHA256);
+        $key_resource        = openssl_pkey_get_public($public_key->body);
+        $verification_status = openssl_verify($message, $signature, $key_resource, OPENSSL_ALGO_SHA256);
 
         if ($verification_status === 1) {
             $nonce->update([
