@@ -76,7 +76,7 @@ class KeysController extends Controller
         }
 
         if ($nonce->used_at) {
-            return response()->json(['error' => 'Nonce already used'], 400);
+            return response()->json(['error' => 'Nonce already used'], 412);  //  precondition failed
         }
 
         if ($nonce->expires_at < now()) {
