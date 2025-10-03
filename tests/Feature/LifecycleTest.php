@@ -98,4 +98,13 @@ class LifecycleTest extends TestCase
 
         $this->assertEquals(0, $used_nonce_count);
     }
+
+    public function testInvalidPublicKey()
+    {
+        $register_response = $this->postJson('/api/register', [
+            'public_key' => "this is not a public key"
+        ]);
+
+        $register_response->assertStatus(422);
+    }
 }

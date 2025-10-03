@@ -15,7 +15,7 @@ class KeysController extends Controller
         if (!openssl_pkey_get_public($keystring)) {
             return response()->json([
                 'error' => 'invalid public key format'
-            ], 400);
+            ], 422);
         }
 
         $key = PublicKey::create([
