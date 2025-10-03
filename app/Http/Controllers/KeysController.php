@@ -6,7 +6,7 @@ use App\Models\Nonce;
 use App\Models\PublicKey;
 use Illuminate\Http\Request;
 
-class AuthController extends Controller
+class KeysController extends Controller
 {
     public function registerPublicKey(Request $request)
     {

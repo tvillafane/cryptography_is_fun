@@ -21,10 +21,10 @@ class LifecycleTest extends TestCase
         parent::setUp();
 
         $this->holder = new HolderService();
-        $this->keys = $this->holder->generateKeyPair();
+        $this->keys   = $this->holder->generateKeyPair();
     }
 
-    public function test_valid_signature_verifies()
+    public function testFullHappyPathWithReplayBounce()
     {
         $keys = $this->holder->generateKeyPair();
 
@@ -32,7 +32,7 @@ class LifecycleTest extends TestCase
             'public_key' => $keys['public_key']
         ]);
 
-        $this->assertEquals(201, $register_response->status());
+        $register_response->assertStatus(201);
 
         $public_key_id = $register_response->json()['public_key_id'];
 
@@ -40,7 +40,6 @@ class LifecycleTest extends TestCase
         $nonce_response->assertStatus(201);
         $nonce = $nonce_response->json('nonce');
 
-        // sign the payload with holder service
         $signed_payload = $this->holder->generateSignedPayload(
             $keys['private_key'],
             $nonce,
@@ -54,5 +53,9 @@ class LifecycleTest extends TestCase
         $used_nonce_count = PublicKey::find($public_key_id)->nonces()->whereNotNull('used_at')->count();
 
         $this->assertEquals(1, $used_nonce_count);
+
+        //  try again and get bounced
+        $second_attempt_response = $this->postJson('/api/verify', $signed_payload);
+        $second_attempt_response->assertStatus(400);
     }
 }

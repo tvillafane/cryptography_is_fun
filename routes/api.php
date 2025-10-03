@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KeysController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/nonce', [AuthController::class, 'generateNonceForKey']);
-Route::post('/verify', [AuthController::class, 'verifyMessage']);
-Route::post('/register', [AuthController::class, 'registerPublicKey']);
+Route::get('/nonce', [KeysController::class, 'generateNonceForKey']);
+Route::post('/verify', [KeysController::class, 'verifyMessage']);
+Route::post('/register', [KeysController::class, 'registerPublicKey']);
