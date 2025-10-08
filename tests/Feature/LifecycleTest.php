@@ -43,7 +43,7 @@ class LifecycleTest extends TestCase
 
         $public_key_id = $register_response->json()['public_key_id'];
 
-        $nonce_response = $this->getJson('/api/nonce?key_id=' . $public_key_id);
+        $nonce_response = $this->postJson('/api/nonce', ['key_id' => $public_key_id]);
         $nonce_response->assertStatus(201);
         $nonce = $nonce_response->json('nonce');
 
@@ -78,7 +78,7 @@ class LifecycleTest extends TestCase
 
         $public_key_id = $register_response->json()['public_key_id'];
 
-        $nonce_response = $this->getJson('/api/nonce?key_id=' . $public_key_id);
+        $nonce_response = $this->postJson('/api/nonce', ['key_id' => $public_key_id]);
         $nonce_response->assertStatus(201);
         $nonce = $nonce_response->json('nonce');
 
