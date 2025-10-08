@@ -6,7 +6,7 @@ DESCRIPTION
 
 ## Requirements
 - [Docker Desktop](https://www.docker.com/products/docker-desktop) (or Docker Engine)
-- [Composer](https://getcomposer.org/) (optional — can use Docker instead)
+- [Composer](https://getcomposer.org/)
 
 ---
 
