@@ -83,7 +83,9 @@ class KeysController extends Controller
             return response()->json(['error' => 'Nonce expired'], 400);
         }
 
+        //  recreate message structure from HolderService
         $message             = $request->input('payload') . $nonce->body;
+        
         $signature           = base64_decode($request->input('signature'));
         $key_resource        = openssl_pkey_get_public($public_key->body);
         $verification_status = openssl_verify($message, $signature, $key_resource, OPENSSL_ALGO_SHA256);

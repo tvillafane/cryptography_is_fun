@@ -4,10 +4,8 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\PublicKey;
-use App\Models\Nonce;
 use App\Services\HolderService;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LifecycleTest extends TestCase
