@@ -25,3 +25,10 @@ cp .env.example .env
 ./vendor/bin/sail artisan test
 ```
 
+### when you're ready to remove the project:
+
+```bash
+./vendor/bin/sail down -v
+cd ..
+rm -rf cryptography_is_fun
+```
